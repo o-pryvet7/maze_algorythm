@@ -5,10 +5,10 @@ import java.io.File;
 
 public class Main {
     public static void main(String args[]){
-        System.out.println("You can enter the maze into the console or save it as a file. \nIf you want to write it as a file, then press 1. If you want to write it to the console, then press another key");
+        System.out.println("You can enter the maze into the console or save it as a file. \nIf you want to write it as a file, then enter 1 to console. If you want to write it to the console, then enter another symbol");
         Scanner scan = new Scanner(System.in);
         if(scan.nextInt()==1){
-            System.out.println("Please put the file with the maze in the folder \"maze_algorithm\" and restart the program. \nIf you have already placed the file in the desired folder, press 1");
+            System.out.println("Please put the file with the maze in the folder \"maze_algorithm\" and restart the program. \nIf you have already placed the file in the desired folder, enter 1");
             if(scan.nextInt()==1){
                 FindPathInFile File_path = new FindPathInFile();
                 File_path.SetFileName(FindFile());
@@ -25,10 +25,10 @@ public class Main {
     public static String FindFile()  {
         File dir = new File(".");
         for(String path : dir.list()) {
-            //System.out.println(path + path.length());
+            System.out.println(path + path.length());
             char[] temp_char = path.toCharArray();
             if((temp_char[0] != '.') && (!CAE(temp_char,"pom.xml")) && (!CAE(temp_char,"src")) && (!CAE(temp_char,"target"))){
-                //System.out.println(path + path.length());
+                System.out.println(path + path.length());
                 return path;
             }
         }
