@@ -29,7 +29,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             int chars = fileReader.read();
             System.out.println("Start Read");
             while(chars != -1){
-                //System.out.print("Read is ok, curren chars is :");
+                System.out.print("Read is ok, curret x is: "+x+", curret y is: "+y+" curren chars is :");
                 _maze[x][y]=(char)chars;
                 if(_maze[x][y]=='\n'){
                     x=0; y++;
@@ -38,12 +38,12 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     start_poz_x=x;
                     start_poz_y=y;
                 }
-                else if(_maze[x][y]=='X'){
-                    target_poz_x=x;
-                    target_poz_y=y;
+                else if(_maze[x][y]=='X') {
+                    target_poz_x = x;
+                    target_poz_y = y;
                 }
+                System.out.print(_maze[x][y]);
                 x++;
-                System.out.print((char)chars);
                 chars = fileReader.read();
             }
             fileReader.close();
