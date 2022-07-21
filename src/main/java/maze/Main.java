@@ -1,15 +1,59 @@
 package maze;
 
 import java.util.Scanner;
+import java.io.File;
 
 public class Main {
-    public void main(){
-        System.out.println("You can type the maze into the console or save it as a file. \n If you want to write it as a file, then press 1. If you want to write it to the console, then press another key");
+    public static void main(String args[]){
+        System.out.println("You can enter the maze into the console or save it as a file. \nIf you want to write it as a file, then press 1. If you want to write it to the console, then press another key");
         Scanner scan = new Scanner(System.in);
         if(scan.nextInt()==1){
-            System.out.println("Please put the file with the maze in the folder \"src\\main\\java\\maze\" and press enter when done");
-            //FindPathInputReaderFile
+            System.out.println("Please put the file with the maze in the folder \"maze_algorithm\" and restart the program. \nIf you have already placed the file in the desired folder, press 1");
+            if(scan.nextInt()==1){
+                FindPathInFile File_path = new FindPathInFile();
+                File_path.SetFileName(FindFile());
+                File_path.Run();
+                //FindFile();
+            }
         }
+        else{
+            System.out.println("Please, enter the maze in the form of symbols \n(\"#\" - wall, \".\" - path, \"S\" - start, \"X\" - end). \nPress \"Enter\" after each line.\nWhen finished, type \"ITSALL\" on a new line and press \"Enter\" again.");
+            System.out.println("You can describe the size of the maze to be scanned (\"widthxheight\"). If you want to use a dynamic size (50x50 - maximum), then enter zero \"0\"");
+        }
+    }
 
+    public static String FindFile()  {
+        File dir = new File(".");
+        for(String path : dir.list()) {
+            //System.out.println(path + path.length());
+            char[] temp_char = path.toCharArray();
+            if((temp_char[0] != '.') && (!CAE(temp_char,"pom.xml")) && (!CAE(temp_char,"src")) && (!CAE(temp_char,"target"))){
+                //System.out.println(path + path.length());
+                return path;
+            }
+        }
+        return null;
+    }
+
+
+    public static boolean CAE(char[] ch1, char[] ch2){// Char Array Equals
+        int len1=ch1.length,len2=ch2.length;
+        int minLen =(len1<len2)?len1:len2;
+            for(int i = 0 ; i < minLen ; i++){
+                if(ch1[i]!=ch2[i])
+                    return false;
+            }
+        return true;
+    }
+
+    public static boolean CAE(char[] ch1, String ch){// Char Array Equals
+        char[] ch2=ch.toCharArray();
+        int len1=ch1.length,len2=ch2.length;
+        int minLen =(len1<len2)?len1:len2;
+        for(int i = 0 ; i < minLen ; i++){
+            if(ch1[i]!=ch2[i])
+                return false;
+        }
+        return true;
     }
 }

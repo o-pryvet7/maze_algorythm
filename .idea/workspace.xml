@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInStdIn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/maze/Main.java" afterDir="false" />
+    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.0">
+      <change afterPath="$PROJECT_DIR$/t.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInStdIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInStdIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +30,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2CFluILbZ7K7Ha4KXA8SCQtZFlW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,6 +47,15 @@
     "last_opened_file_path": "D:/praca/Programing/LearnJava"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="maze_algorithm" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="maze.Main" />
+      <module name="maze_algorithm" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,6 +65,14 @@
       <option name="presentableId" value="Default" />
       <updated>1658406435932</updated>
     </task>
+    <task id="LOCAL-00001" summary="v1.0">
+      <created>1658410957507</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658410957507</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -69,5 +85,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="v1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.0" />
   </component>
 </project>
