@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.3">
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/maze/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +27,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2CFluILbZ7K7Ha4KXA8SCQtZFlW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -97,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658495404292</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="v1.3">
+      <created>1658500212972</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658500212972</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -115,6 +121,7 @@
     <MESSAGE value="v1.0" />
     <MESSAGE value="v1.1" />
     <MESSAGE value="v1.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.2" />
+    <MESSAGE value="v1.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.3" />
   </component>
 </project>

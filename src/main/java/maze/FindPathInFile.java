@@ -1,10 +1,10 @@
 package maze;
 
-import java.io.File;
+//import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
+//import java.net.MalformedURLException;
 
 
 public class FindPathInFile extends AbstractFindPathInputReader {
@@ -22,6 +22,10 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         } else System.out.println("MAZES ISN`T EQUALS");
         ReadFile();
         TransferMazeCharToInt();
+    }
+
+    public void FindPath(){
+
     }
 
     public void TransferMazeCharToInt(){
@@ -42,7 +46,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         }
     }
 
-    public boolean FileEquals(String Writer, String Reader){
+    private boolean FileEquals(String Writer, String Reader){
         boolean temp_return = true;
         try{
             FileReader fileReader = new FileReader(Reader);
@@ -67,16 +71,16 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         return temp_return;
     }
 
-    public void ReadFile(){
+    private void ReadFile(){
         int x=0,y=0;
         try{
             FileReader fileReader = new FileReader(FileName);
-            FileWriter fileWriter_maze = new FileWriter(new File("src/main/resources/previous_maze.txt"));
+            FileWriter fileWriter_maze = new FileWriter("src/main/resources/previous_maze.txt");
             int chars = fileReader.read();
             System.out.println("Start Read");
             if(chars!=-1) while(chars != -1){
                 fileWriter_maze.write((char)chars);
-                //System.out.print("\nRead is ok, curret x is: "+x+", curret y is: "+y+",curret char symbol is :"+chars+", curren chars is :");
+                //System.out.print("\nRead is ok, current x is: "+x+", current y is: "+y+",current char symbol is :"+chars+", current chars is :");
                 _maze[x][y]=(char)chars;
                 if((_maze[x][y]==13)||_maze[x][y]=='\n'){// CRLF
                     x=0; y++;
@@ -116,7 +120,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             System.out.println("Start Analysis");
             while(chars!=-1){
                 x++;
-                System.out.println("Analysis x++   , curret chars is : "+chars+" +in char : "+(char)chars);
+                System.out.println("Analysis x++   , current chars is : "+chars+" +in char : "+(char)chars);
                 if((char)chars=='\n'){
                     System.out.println("Analysis y++");
                     width=x+1;
@@ -138,7 +142,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     }
     public void SetFileName(String Name){
         FileName=Name;
-    };
+    }
     public String GetFileName(){
         return FileName;
     }
