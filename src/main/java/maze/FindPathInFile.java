@@ -14,6 +14,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     private int[][] _maze_index;// -1-target, 0-free way, 1-a free path that has already been used, 2-start, 3-wall,
     private int height=0,width=0;
     private int start_poz_x=0, start_poz_y=0, target_poz_x=0, target_poz_y=0;
+    private int current_x=0, current_y=0;
 
     public void Run(){
         SizeAnalysis();
@@ -24,8 +25,18 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         TransferMazeCharToInt();
     }
 
-    public void FindPath(){
+    public void FindPath(boolean Equals){
+        SetCurrentPosition(start_poz_x,start_poz_y);
 
+    }
+
+    public boolean FindPathRecursion(int x, int y){
+        if(_maze_index[x][y]==-1)
+            return true;//finish
+        else{
+            //if((x<width-1)
+            return false;//the path continues
+        }
     }
 
     public void TransferMazeCharToInt(){
@@ -121,9 +132,9 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             while(chars!=-1){
                 x++;
                 System.out.println("Analysis x++   , current chars is : "+chars+" +in char : "+(char)chars);
-                if((char)chars=='\n'){
+                if(((char)chars=='\n') || (chars==10)){
                     System.out.println("Analysis y++");
-                    width=x+1;
+                    width=x;
                     x=0;
                     y++;
                 }
@@ -145,5 +156,22 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     }
     public String GetFileName(){
         return FileName;
+    }
+
+    public void SetCurrentPosition(int _x, int _y){
+        current_x=_x;
+        current_y=_y;
+    }
+    public void SetCurrent_x(int _x){
+        current_x=_x;
+    }
+    public void SetCurrent_y(int _y){
+        current_y=_y;
+    }
+    public int SetCurrent_x(){
+        return current_x;
+    }
+    public int SetCurrent_y(){
+        return current_y;
     }
 }
