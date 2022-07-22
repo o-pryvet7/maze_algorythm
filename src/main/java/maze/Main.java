@@ -27,7 +27,7 @@ public class Main {
         for(String path : dir.list()) {
             System.out.println(path + path.length());
             char[] temp_char = path.toCharArray();
-            if((temp_char[0] != '.') && (!CAE(temp_char,"pom.xml")) && (!CAE(temp_char,"src")) && (!CAE(temp_char,"target"))){
+            if((temp_char[0] != '.') && (!CAE(temp_char,"pom.xml")) && (!CAE(temp_char,"src")) && (!CAE(temp_char,"target")) && (DotCheck(temp_char))){
                 System.out.println(path + path.length());
                 return path;
             }
@@ -36,6 +36,13 @@ public class Main {
     }
 
 
+    public static boolean DotCheck(char[] ch){
+        for(int i = 0 ; i < ch.length ; i++){
+            if(ch[i]==46)
+                return true;
+        }
+        return false;
+    };
     public static boolean CAE(char[] ch1, char[] ch2){// Char Array Equals
         int len1=ch1.length,len2=ch2.length;
         int minLen =(len1<len2)?len1:len2;

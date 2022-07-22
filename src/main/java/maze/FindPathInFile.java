@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 
 
 public class FindPathInFile extends AbstractFindPathInputReader {
-    private String FileName;
+    private String FileName = "maze.txt";
     //private String temp_imp_maze;
     private char[][] _maze;
     private int[][] _maze_index;// -1-target, 0-free way, 1-a free path that has already been used, 2-start, 3-wall,
@@ -21,10 +21,25 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             System.out.println("MAZES IS EQUALS");
         } else System.out.println("MAZES ISN`T EQUALS");
         ReadFile();
+        TransferMazeCharToInt();
     }
 
-    public void InputMaze(){
-
+    public void TransferMazeCharToInt(){
+        int temp=2;
+        System.out.println("Width is : "+ width +", Height is : "+ height);
+        for(int i=0;i<height;i++){
+            for(int j=0;j<width;j++){
+                if(_maze[j][i]==83)
+                    temp=2;
+                else if(_maze[j][i]==88)
+                    temp=-1;
+                else if(_maze[j][i]==46)
+                    temp=0;
+                else if(_maze[j][i]==35)
+                    temp=3;
+                _maze_index[j][i]=temp;
+            }
+        }
     }
 
     public boolean FileEquals(String Writer, String Reader){
@@ -117,6 +132,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             e.printStackTrace();
         }
         _maze = new char[width][height];
+        _maze_index = new int[width][height];
         System.out.println("End Analysis");
 
     }
