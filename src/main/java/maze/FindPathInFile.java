@@ -4,43 +4,160 @@ package maze;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 //import java.net.MalformedURLException;
 
 
 public class FindPathInFile extends AbstractFindPathInputReader {
     private String FileName = "maze.txt";
+    //Wave method->
+    WavePoint[][] wavePoints;
+
+    //<-Wave method
+    private short prev_mov=-1, prev_prev_mov=-1, current_mov=-1;
     //private String temp_imp_maze;
     private char[][] _maze;
-    private int[][] _maze_index;// -1-target, 0-free way, 1-a free path that has already been used, 2-start, 3-wall,
+    private short[][] _maze_index;// -1-target, 0-free way, 1-a free path that has already been used, 2-start, 3-wall,
     private int height=0,width=0;
-    private int start_poz_x=0, start_poz_y=0, target_poz_x=0, target_poz_y=0;
-    private int current_x=0, current_y=0;
+    private short start_poz_x=0, start_poz_y=0, target_poz_x=0, target_poz_y=0;
+    private short current_x=0, current_y=0;
 
     public void Run(){
         SizeAnalysis();
-        if(FileEquals("src/main/resources/previous_maze.txt" ,GetFileName())){
+        if(FileEquals("src/main/resources/previous_maze.md" ,GetFileName())){
             System.out.println("MAZES IS EQUALS");
         } else System.out.println("MAZES ISN`T EQUALS");
         ReadFile();
         TransferMazeCharToInt();
+        FindPath(FileEquals("src/main/resources/previous_maze.md" ,GetFileName()));
     }
 
     public void FindPath(boolean Equals){
         SetCurrentPosition(start_poz_x,start_poz_y);
-
+        //FindPathBody();
+        //System.out.println("\n\nALL IS DONE\n\n");
     }
 
-    public boolean FindPathRecursion(int x, int y){
-        if(_maze_index[x][y]==-1)
-            return true;//finish
-        else{
-            //if((x<width-1)
-            return false;//the path continues
+    private void WavePointsInitial(){
+        wavePoints = new WavePoint[width][height];
+        for(int i = 0;i < height; i++){
+            for(int k = 0;k < width; k++){
+                wavePoints[k][i].SetValue(0);
+                if(_maze_index[k][i]=='#'){
+                    wavePoints[k][i].SetIsWall(true);
+                }
+                else{
+                    wavePoints[k][i].SetIsWall(false);
+                }
+            }
         }
     }
 
+    public void WaveMethod(){
+        current_x = start_poz_x;
+        current_y = start_poz_y;
+
+    }
+
+     public boolean FindPathBody(){
+        Random rand = new Random();
+        int temp_way[] = new int[4];//index  : 0-right, 1-up, 2-left, 3-down   // value like _maze_index
+        System.out.println(" - FINDPATHRECURSION Start - ");
+        while(_maze_index[current_x][current_y]!=-1){
+            try{
+                Thread.sleep(10);
+            }
+            catch(InterruptedException ex){
+                Thread.currentThread().interrupt();
+            }
+            current_mov = (short)(rand.nextInt(3));
+            System.out.println(" \nCURRENT POS : "+current_x+" X "+current_y);
+           // try {
+                //Thread.sleep( 500);
+            //} catch (InterruptedException ie) {
+            //    Thread.currentThread().interrupt();
+            //}
+            //System.out.println(" - FINDPATHRECURSION GO - ");
+            if((current_x<width-1) && (_maze_index[current_x+1][current_y]==BestWay(current_x,current_y)) && (_maze_index[current_x+1][current_y]<3) && ((prev_mov!=2) || (current_mov==0))){
+                temp_way[0] =_maze_index[current_x+1][current_y];
+                if (temp_way[0]<3){
+                    _maze_index[current_x][current_y]=1;
+                    current_x++;
+                    prev_prev_mov=prev_mov;
+                    prev_mov=0;
+                }
+                //System.out.println(" CURRENT WIDTH IS : "+ width +", CURRENT HEIGHT IS : "+ height +", CURRENT WAY IS RIGHT, CURRENT RIGHT BLOCK IS : "+ _maze_index[current_x+1][current_y]);
+            }
+            else if((current_y>0) && (_maze_index[current_x][current_y-1]==BestWay(current_x,current_y)) && (_maze_index[current_x][current_y-1]<3) && ((prev_mov!=3) || (current_mov==1))){
+                temp_way[1] =_maze_index[current_x][current_y-1];
+                if (temp_way[1]<3){
+                    _maze_index[current_x][current_y]=1;
+                    current_y--;
+                    prev_prev_mov=prev_mov;
+                    prev_mov=1;
+                }
+                //System.out.println(" CURRENT WIDTH IS : "+ width +", CURRENT HEIGHT IS : "+ height +", CURRENT WAY IS UP, CURRENT UP BLOCK IS : "+ _maze_index[current_x][current_y-0]);
+            }
+            else if((current_x>1) && (_maze_index[current_x-1][current_y]==BestWay(current_x,current_y)) && (_maze_index[current_x-1][current_y]<3) && ((prev_mov!=0) || (current_mov==2))){
+                temp_way[2] =_maze_index[current_x-1][current_y];
+                if (temp_way[2]<3){
+                    _maze_index[current_x][current_y]=1;
+                    current_x--;
+                    prev_prev_mov=prev_mov;
+                    prev_mov=3;
+                }
+                //System.out.println(" CURRENT WIDTH IS : "+ width +", CURRENT HEIGHT IS : "+ height +", CURRENT WAY IS LEFT, CURRENT LEFT BLOCK IS : "+ _maze_index[current_x-1][current_y]);
+            }
+            else if((current_y<height-1) && (_maze_index[current_x][current_y+1]==BestWay(current_x,current_y)) && (_maze_index[current_x][current_y+1]<3) && ((prev_mov!=1) || (current_mov==3))){
+                temp_way[3] =_maze_index[current_x][current_y+1];
+                if (temp_way[3]<3){
+                    _maze_index[current_x][current_y]=1;
+                    current_y++;
+                    prev_prev_mov=prev_mov;
+                    prev_mov=3;
+                }
+                //System.out.println(" CURRENT WIDTH IS : "+ width +", CURRENT HEIGHT IS : "+ height +", CURRENT WAY IS DOWN, CURRENT DOWN BLOCK IS : "+ _maze_index[current_x][current_y+1]);
+            }
+            if(_maze_index[current_x][current_y]==-1)
+                break;
+
+        }
+            return true;
+            //return false;//the path continues
+    }
+
+    public int BestWay(int x, int y){
+        //System.out.println(" --- BEST WAY CHECKING --- ");
+        int[] temp_list = new int[4]; int min=3;
+        for(int i=0;i<4;i++)temp_list[i]=3;
+        if (x+1<width){
+            temp_list[0]=_maze_index[x+1][y];
+            //System.out.print("Right way exist and its "+_maze_index[x+1][y]+" , ");
+        }
+        if (y>0){
+            temp_list[1]=_maze_index[x][y-1];
+            //System.out.print("Up way exist and its "+_maze_index[x][y-1]+" , ");
+        }
+        if (x>0){
+            temp_list[2]=_maze_index[x-1][y];
+            //System.out.print("left way exist and its "+_maze_index[x-1][y]+" , ");
+        }
+        if (y+1<height){
+            temp_list[3]=_maze_index[x][y+1];
+            //System.out.print("Down way exist and its "+_maze_index[x][y+1]+" , ");
+        }
+        System.out.println("");
+        for(int i=0;i<4;i++){
+            if(min>temp_list[i])
+                min = temp_list[i];
+        }
+        System.out.println(" --- BEST WAY IS :"+ min +" --- ");
+        return min;
+    }
+
     public void TransferMazeCharToInt(){
-        int temp=2;
+        short temp=2;
+        width-=2;
         System.out.println("Width is : "+ width +", Height is : "+ height);
         for(int i=0;i<height;i++){
             for(int j=0;j<width;j++){
@@ -83,33 +200,52 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     }
 
     private void ReadFile(){
-        int x=0,y=0;
+        short x=0,y=0;
         try{
             FileReader fileReader = new FileReader(FileName);
-            FileWriter fileWriter_maze = new FileWriter("src/main/resources/previous_maze.txt");
-            int chars = fileReader.read();
+            FileWriter fileWriter_maze = new FileWriter("src/main/resources/previous_maze.md");
+            int chars=0;
             System.out.println("Start Read");
-            if(chars!=-1) while(chars != -1){
-                fileWriter_maze.write((char)chars);
-                //System.out.print("\nRead is ok, current x is: "+x+", current y is: "+y+",current char symbol is :"+chars+", current chars is :");
-                _maze[x][y]=(char)chars;
-                if((_maze[x][y]==13)||_maze[x][y]=='\n'){// CRLF
-                    x=0; y++;
+            if(chars!=-1){
+                while(chars != -1){
+                    try {
+                        Thread.sleep(5);
+                    }
+                    catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
                     chars = fileReader.read();
                     fileWriter_maze.write((char)chars);
-                    _maze[x][y]=(char)chars;
+                    if(chars != 13 && chars !=10){
+                        //System.out.print((char)chars);
+                        x++;
+                        _maze[x][y] = (char)chars;
+                    }
+                    else{
+                        x=1;
+                        if(chars == 10){
+                            y++;
+                            //System.out.println();
+                        }
+                    }
+                    if(_maze[x][y] == 'S'){
+                        start_poz_x= (short) (x-1);
+                        start_poz_y=y;
+                    }
+                    else if(_maze[x][y] == 'X'){
+                        target_poz_x= (short) (x-1);
+                        target_poz_y=y;
+                    }
+                    if(chars==13 || chars==10)x--;
+                    //System.out.print("\nRead is ok, current x is: "+x+", current y is: "+y+",current char symbol is :"+chars+", current chars is :");
                 }
-                else if(_maze[x][y]=='S'){
-                    start_poz_x=x;
-                    start_poz_y=y;
-                }
-                else if(_maze[x][y]=='X') {
-                    target_poz_x = x;
-                    target_poz_y = y;
-                }
-                System.out.print(_maze[x][y]);
-                x++;
-                chars = fileReader.read();
+                //System.out.println(" --- ");
+//                for (int n = 0; n < height; n++){
+//                    for(int m = 0; m < width; m++){
+//                        System.out.print(" "+_maze[m][n]);
+//                    }
+//                    System.out.println("");
+//                }
             }
             else
                 System.out.println("\nERROR");
@@ -147,7 +283,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             e.printStackTrace();
         }
         _maze = new char[width][height];
-        _maze_index = new int[width][height];
+        _maze_index = new short[width][height];
         System.out.println("End Analysis");
 
     }
@@ -158,20 +294,20 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         return FileName;
     }
 
-    public void SetCurrentPosition(int _x, int _y){
+    public void SetCurrentPosition(short _x, short _y){
         current_x=_x;
         current_y=_y;
     }
-    public void SetCurrent_x(int _x){
+    public void SetCurrent_x(short _x){
         current_x=_x;
     }
-    public void SetCurrent_y(int _y){
+    public void SetCurrent_y(short _y){
         current_y=_y;
     }
-    public int SetCurrent_x(){
+    public short GetCurrent_x(){
         return current_x;
     }
-    public int SetCurrent_y(){
+    public short GetCurrent_y(){
         return current_y;
     }
 }
