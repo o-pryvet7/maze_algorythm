@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.3.4">
-      <change afterPath="$PROJECT_DIR$/src/main/java/maze/WavePoint.java" afterDir="false" />
+    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.4 - attempt to use the wave method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/previous_maze.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/previous_maze.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/t.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/t.txt" beforeDir="false" afterPath="$PROJECT_DIR$/t.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/WavePoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/WavePoint.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658503292108</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="v1.4 - attempt to use the wave method">
+      <created>1658591730344</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1658591730344</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,6 +148,7 @@
     <MESSAGE value="v1.3.1" />
     <MESSAGE value="v1.3.2" />
     <MESSAGE value="v1.3.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.3.4" />
+    <MESSAGE value="v1.4 - attempt to use the wave method" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.4 - attempt to use the wave method" />
   </component>
 </project>

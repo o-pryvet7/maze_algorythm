@@ -11,7 +11,8 @@ import java.util.Random;
 public class FindPathInFile extends AbstractFindPathInputReader {
     private String FileName = "maze.txt";
     //Wave method->
-    WavePoint[][] wavePoints;
+    WavePoint[] wavePoints;
+    private boolean foundTarget=false;
 
     //<-Wave method
     private short prev_mov=-1, prev_prev_mov=-1, current_mov=-1;
@@ -34,29 +35,86 @@ public class FindPathInFile extends AbstractFindPathInputReader {
 
     public void FindPath(boolean Equals){
         SetCurrentPosition(start_poz_x,start_poz_y);
+        WaveMethod();
         //FindPathBody();
         //System.out.println("\n\nALL IS DONE\n\n");
     }
 
-    private void WavePointsInitial(){
-        wavePoints = new WavePoint[width][height];
+    public void WavePointsInitial(){
+        wavePoints = new WavePoint[width*height];
         for(int i = 0;i < height; i++){
             for(int k = 0;k < width; k++){
-                wavePoints[k][i].SetValue(0);
-                if(_maze_index[k][i]=='#'){
-                    wavePoints[k][i].SetIsWall(true);
-                }
-                else{
-                    wavePoints[k][i].SetIsWall(false);
-                }
+                System.out.println(" -Counter temp : "+ (i*width+k));
+                    wavePoints[ (i*width+k) ] = new WavePoint();
+                    wavePoints[ (i*width+k) ].SetX(k);
+                    wavePoints[ (i*width+k) ].SetY(i);
+                    if(_maze_index[k][i]=='S')
+                        wavePoints[ (i*width+k) ].SetValue(1);
             }
         }
     }
 
-    public void WaveMethod(){
-        current_x = start_poz_x;
-        current_y = start_poz_y;
+    public void WaveMethodDisplay(){
 
+    }
+
+
+    public void WaveMethod(){
+        WavePointsInitial();
+        int Value = 1;
+        int temp_counter=0;
+        int target_index = TargetPointCheck();
+        while(wavePoints[target_index].GetValue()==0){
+            for(int i = 0; i < wavePoints.length; i++){
+                if(wavePoints[i].GetValue() == Value){
+                    if(wavePoints[i].GetX()<width-1){
+                        temp_counter = FindNearPoint(wavePoints[i].GetX()+1, wavePoints[i].GetY());
+                        if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                            wavePoints[temp_counter].SetValue(Value+1);
+                            wavePoints[temp_counter].Disabled();
+                        }
+                    }
+                    else if(wavePoints[i].GetX()>0){
+                        temp_counter = FindNearPoint(wavePoints[i].GetX()-1, wavePoints[i].GetY());
+                        if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                            wavePoints[temp_counter].SetValue(Value+1);
+                            wavePoints[temp_counter].Disabled();
+                        }
+                    }
+                    else if(wavePoints[i].GetY()<height-1){
+                        temp_counter = FindNearPoint(wavePoints[i].GetX(), wavePoints[i].GetY()+1);
+                        if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                            wavePoints[temp_counter].SetValue(Value+1);
+                            wavePoints[temp_counter].Disabled();
+                        }
+                    }
+                    else if(wavePoints[i].GetY()>0){
+                        temp_counter = FindNearPoint(wavePoints[i].GetX(), wavePoints[i].GetY()-1);
+                        if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                            wavePoints[temp_counter].SetValue(Value+1);
+                            wavePoints[temp_counter].Disabled();
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(" --- FINAL --- ");
+    }
+
+    public int FindNearPoint(int x, int y){
+        for(int i = 0;i<wavePoints.length;i++){
+            if(wavePoints[i].GetX()==x && wavePoints[i].GetY()==y)
+                return i;
+        }
+        return -1;
+    }
+
+    public int TargetPointCheck(){
+        for(int i = 0;i<wavePoints.length;i++){
+            if(wavePoints[i].GetX()==target_poz_x && wavePoints[i].GetY()==target_poz_y)
+                return i;
+        }
+        return -1;
     }
 
      public boolean FindPathBody(){
