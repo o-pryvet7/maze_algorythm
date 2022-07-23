@@ -42,29 +42,47 @@ public class FindPathInFile extends AbstractFindPathInputReader {
 
     public void WavePointsInitial(){
         wavePoints = new WavePoint[width*height];
+        for(int i = 0;i < height; i++)
+            for(int k = 0;k < width; k++)
+                wavePoints[ (i*width+k) ] = new WavePoint();
+
         for(int i = 0;i < height; i++){
             for(int k = 0;k < width; k++){
-                System.out.println(" -Counter temp : "+ (i*width+k));
-                    wavePoints[ (i*width+k) ] = new WavePoint();
+                //System.out.println(" -Counter temp : "+ (i*width+k));
                     wavePoints[ (i*width+k) ].SetX(k);
                     wavePoints[ (i*width+k) ].SetY(i);
-                    if(_maze_index[k][i]=='S')
-                        wavePoints[ (i*width+k) ].SetValue(1);
+                    wavePoints[ (start_poz_y*width+start_poz_x) ].SetValue(1);
+                    if(_maze_index[k][i]==3){
+                        wavePoints[ (i*width+k) ].SetIsWall(true);
+                    }
             }
         }
     }
 
     public void WaveMethodDisplay(){
-
+        try {
+            Thread.sleep(100);
+        }
+        catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        for(int i = 0;i < height; i++){
+            for(int k = 0;k < width; k++){
+                System.out.print(" "+wavePoints[ (i*width+k) ].GetValue());
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
 
     public void WaveMethod(){
         WavePointsInitial();
-        int Value = 1;
+        int Value = 0;
         int temp_counter=0;
         int target_index = TargetPointCheck();
         while(wavePoints[target_index].GetValue()==0){
+            Value++;
             for(int i = 0; i < wavePoints.length; i++){
                 if(wavePoints[i].GetValue() == Value){
                     if(wavePoints[i].GetX()<width-1){
@@ -74,29 +92,30 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                             wavePoints[temp_counter].Disabled();
                         }
                     }
-                    else if(wavePoints[i].GetX()>0){
+                    if(wavePoints[i].GetX()>0){
                         temp_counter = FindNearPoint(wavePoints[i].GetX()-1, wavePoints[i].GetY());
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
                     }
-                    else if(wavePoints[i].GetY()<height-1){
+                    if(wavePoints[i].GetY()<height-1){
                         temp_counter = FindNearPoint(wavePoints[i].GetX(), wavePoints[i].GetY()+1);
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
                     }
-                    else if(wavePoints[i].GetY()>0){
+                    if(wavePoints[i].GetY()>0){
                         temp_counter = FindNearPoint(wavePoints[i].GetX(), wavePoints[i].GetY()-1);
-                        if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                        if((wavePoints[temp_counter].GetValue() == 0) && (wavePoints[temp_counter].IsEnabled()) && (!wavePoints[temp_counter].GetIsWall()) ){
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
                     }
                 }
             }
+            WaveMethodDisplay();
         }
         System.out.println(" --- FINAL --- ");
     }
@@ -227,8 +246,11 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     temp=0;
                 else if(_maze[j][i]==35)
                     temp=3;
+
                 _maze_index[j][i]=temp;
+                System.out.print(" "+_maze_index[j][i]);
             }
+            System.out.println();
         }
     }
 
@@ -276,8 +298,8 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     fileWriter_maze.write((char)chars);
                     if(chars != 13 && chars !=10){
                         //System.out.print((char)chars);
-                        x++;
                         _maze[x][y] = (char)chars;
+                        x++;
                     }
                     else{
                         x=1;
@@ -297,13 +319,13 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     if(chars==13 || chars==10)x--;
                     //System.out.print("\nRead is ok, current x is: "+x+", current y is: "+y+",current char symbol is :"+chars+", current chars is :");
                 }
-                //System.out.println(" --- ");
-//                for (int n = 0; n < height; n++){
-//                    for(int m = 0; m < width; m++){
-//                        System.out.print(" "+_maze[m][n]);
-//                    }
-//                    System.out.println("");
-//                }
+                System.out.println(" --- ");
+                for (int n = 0; n < height; n++){
+                    for(int m = 0; m < width; m++){
+                        System.out.print(" "+_maze[m][n]);
+                    }
+                    System.out.println("");
+                }
             }
             else
                 System.out.println("\nERROR");
@@ -325,9 +347,9 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             System.out.println("Start Analysis");
             while(chars!=-1){
                 x++;
-                System.out.println("Analysis x++   , current chars is : "+chars+" +in char : "+(char)chars);
+                //System.out.println("Analysis x++   , current chars is : "+chars+" +in char : "+(char)chars);
                 if(((char)chars=='\n') || (chars==10)){
-                    System.out.println("Analysis y++");
+                    //System.out.println("Analysis y++");
                     width=x;
                     x=0;
                     y++;

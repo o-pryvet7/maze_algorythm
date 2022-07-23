@@ -25,7 +25,7 @@ public class Main {
     public static String FindFile()  {
         File dir = new File(".");
         for(String path : dir.list()) {
-            System.out.println(path + path.length());
+            //System.out.println(path + path.length());
             char[] temp_char = path.toCharArray();
             if((temp_char[0] != '.') && (!CAE(temp_char,"pom.xml")) && (!CAE(temp_char,"src")) && (!CAE(temp_char,"target")) && (DotCheck(temp_char))){
                 System.out.println(path + path.length());
