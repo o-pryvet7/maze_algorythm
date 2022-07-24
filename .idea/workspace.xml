@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v2.0 - &quot;do nothing&quot;.. it`s working">
+    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v2.1 - check for error or deadlock has been added">
+      <change afterPath="$PROJECT_DIR$/src/main/java/maze/MazeGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInConsole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/maze/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/temp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/temp.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/t.txt" beforeDir="false" afterPath="$PROJECT_DIR$/t.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -227,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658685403509</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="v2.1 - check for error or deadlock has been added">
+      <created>1658687257770</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1658687257770</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,6 +265,7 @@
     <MESSAGE value="v1.5.2 - file processing completed" />
     <MESSAGE value="v1.6 - do nothing" />
     <MESSAGE value="v2.0 - &quot;do nothing&quot;.. it`s working" />
-    <option name="LAST_COMMIT_MESSAGE" value="v2.0 - &quot;do nothing&quot;.. it`s working" />
+    <MESSAGE value="v2.1 - check for error or deadlock has been added" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2.1 - check for error or deadlock has been added" />
   </component>
 </project>

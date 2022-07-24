@@ -5,15 +5,34 @@ import java.io.File;
 
 public class Main {
     public static void main(String args[]){
-        System.out.println("You can enter the maze into the console or save it as a file. \nIf you want to write it as a file, then enter 1 to console. If you want to write it to the console, then enter another symbol");
+        System.out.println("You can enter the maze into the console or save it as a file. \nIf you want to write it as a file, then enter 1 to console." +
+                " If you want to write it to the console, then enter another symbol.\n\nif you want to run an automatic generator of fields with walls, then press 0");
         Scanner scan = new Scanner(System.in);
-        if(scan.nextLine().charAt(0)== '1'){
+        char sc = scan.nextLine().charAt(0);
+        if(sc=='1'){
             System.out.println("Please put the file with the maze in the folder \"maze_algorithm\" and restart the program. \nIf you have already placed the file in the desired folder, enter 1");
             if(scan.nextInt()==1){
                 FindPathInFile File_path = new FindPathInFile();
                 File_path.SetFileName(FindFile());
                 File_path.Run();
                 //FindFile();
+            }
+        }
+        else if(sc=='0'){
+            while(true){
+                MazeGenerator.Run("t.txt");
+                FindPathInFile findPathInFile = new FindPathInFile();
+                findPathInFile.SetFileName("t.txt");
+                findPathInFile.Run();
+                try
+                {
+                    Thread.sleep(1000);
+                }
+                catch(InterruptedException ex)
+                {
+                    Thread.currentThread().interrupt();
+                }
+                System.out.println(" \n--------------------------\n ");
             }
         }
         else{
