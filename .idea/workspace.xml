@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.5.2 - file processing completed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInConsole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInStdIn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/maze/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/Main.java" afterDir="false" />
+    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.6 - do nothing">
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInConsole.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +201,21 @@
       <option name="project" value="LOCAL" />
       <updated>1658672638296</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="v1.5.2 - file processing completed">
+      <created>1658684964952</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1658684964952</updated>
+    </task>
+    <task id="LOCAL-00021" summary="v1.6 - do nothing">
+      <created>1658685009502</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1658685009502</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -237,6 +246,7 @@
     <MESSAGE value="v1.5.1.2 - path entry" />
     <MESSAGE value="v1.5.1.3 - path entry" />
     <MESSAGE value="v1.5.2 - file processing completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.5.2 - file processing completed" />
+    <MESSAGE value="v1.6 - do nothing" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.6 - do nothing" />
   </component>
 </project>

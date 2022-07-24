@@ -8,20 +8,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FindPathInConsole extends  AbstractFindPathInputReader{
-    //Wave method->
-    WavePoint[] wavePoints;
-    private boolean foundTarget=false;
 
-    //<-Wave method
-    private int prev_mov=-1, prev_prev_mov=-1, current_mov=-1;
-    //private String temp_imp_maze;
-    private char[][] _maze;
-    private int[][] _maze_index;// -1-target, 0-free way, 1-a free path that has already been used, 2-start, 3-wall,
-    private int temp_height=50,temp_width=50, height=0, width=0;
-    private int start_poz_x=0, start_poz_y=0, target_poz_x=0, target_poz_y=0;
-    private int current_x=0, current_y=0;
     public void Run(){
-        Input();
+        FindPathInFile findPathInFile = new FindPathInFile();
+        findPathInFile.SetFileName( Input());
+        findPathInFile.Run();
     }
 
     @Override
@@ -75,7 +66,7 @@ public class FindPathInConsole extends  AbstractFindPathInputReader{
 
     }
 
-    private void Input() {
+    private String Input() {
         try {
             FileWriter fileWriter = new FileWriter("src/main/resources/temp.txt", false);
             Scanner scanner = new Scanner(System.in);
@@ -94,6 +85,7 @@ public class FindPathInConsole extends  AbstractFindPathInputReader{
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        return ("src/main/resources/temp.txt");
     }
 
 }
