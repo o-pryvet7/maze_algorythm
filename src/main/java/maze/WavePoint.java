@@ -25,7 +25,7 @@ public class WavePoint {
     public boolean GetIsWall(){ return IsWall; }
     public void SetPosition(int x, int y){ xPos=x; yPos=y; }
     public void SetY(int n){yPos=n;}
-    public void SetX(int n){xPos=n;}
+    public void SetX(int n){xPos=n;} //...yes
     public int GetX(){ return xPos; }
     public int GetY(){ return yPos; }
     public void SetValue(int _value){ value=_value; }

@@ -14,22 +14,23 @@ public class MazeGenerator {
     public static void Run(String File){
         MazeGenerate(File);
     }
-    private static void MazeInit(){
+    private static void MazeInit(){ //Initial data
         width = 20 + (int)(Math.random()*500);
         height = 20 + (int)(Math.random()*500);
         maze = new char[width][height];
     }
 
-    public static void MazeGenerate(String File){
+    public static void MazeGenerate(String File){//Pretty simple generator of fields and mazes
         MazeInit();
         int temp,temp2;
         try {
             FileWriter fileWriter = new FileWriter("src/main/resources/temp.txt", false);
             for(int i = 0;i < height; i++){
                 for(int k=0;k<width;k++){
-                    temp = 0 + (int)(Math.random()*1);
+                    temp = 0 + (int)(Math.random()*2);
                     switch (temp){
                         case 0:
+                        case 2:
                             maze[k][i] = '.';
                             break;
                         case 1:
@@ -53,7 +54,7 @@ public class MazeGenerator {
         WriteToFile(File);
     }
 
-    public static void WriteToFile(String File){
+    public static void WriteToFile(String File){ //Writing the finished maze to a file
         try{
             FileWriter fileWriter = new FileWriter(File);
             for(int i = 0;i < height;i++){

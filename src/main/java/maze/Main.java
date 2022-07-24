@@ -5,11 +5,12 @@ import java.io.File;
 
 public class Main {
     public static void main(String args[]){
+        //I wanted to do something better. But it just happened
         System.out.println("You can enter the maze into the console or save it as a file. \nIf you want to write it as a file, then enter 1 to console." +
                 " If you want to write it to the console, then enter another symbol.\n\nif you want to run an automatic generator of fields with walls, then press 0");
         Scanner scan = new Scanner(System.in);
         char sc = scan.nextLine().charAt(0);
-        if(sc=='1'){
+        if(sc=='1'){//Finding a file in the root folder and running the algorithm
             System.out.println("Please put the file with the maze in the folder \"maze_algorithm\" and restart the program. \nIf you have already placed the file in the desired folder, enter 1");
             if(scan.nextInt()==1){
                 FindPathInFile File_path = new FindPathInFile();
@@ -18,24 +19,24 @@ public class Main {
                 //FindFile();
             }
         }
-        else if(sc=='0'){
-            while(true){
+        else if(sc=='0'){//Starting the generator
+            for(int i =0;i<50;i++){
                 MazeGenerator.Run("t.txt");
                 FindPathInFile findPathInFile = new FindPathInFile();
                 findPathInFile.SetFileName("t.txt");
                 findPathInFile.Run();
-                try
-                {
+                try {
                     Thread.sleep(1000);
                 }
-                catch(InterruptedException ex)
-                {
+                catch(InterruptedException ex) {          //I wrote this here, because when I launched it for the first time, I didn’t even have time to notice if there was a way
                     Thread.currentThread().interrupt();
                 }
                 System.out.println(" \n--------------------------\n ");
             }
+            File file = new File("t.txt");
+            file.delete(); //deleting a file
         }
-        else{
+        else{//Input from the console (very inconvenient)
             System.out.println("Please, enter the maze in the form of symbols \n(\"#\" - wall, \".\" - free element, \"S\" - start, \"X\" - end). \nPress \"Enter\" after each line.\nWhen finished, type \"ITSALL\" on a new line and press \"Enter\" again.");
             System.out.println("The program uses dynamic size. Maximum : 500 X 500");
             FindPathInConsole Console_path = new FindPathInConsole();
@@ -43,7 +44,7 @@ public class Main {
         }
     }
 
-    public static String FindFile()  {
+    public static String FindFile()  {//A function to search for a file that is not required in the root folder. Most likely it is in it that there is a maze
         File dir = new File(".");
         for(String path : dir.list()) {
             //System.out.println(path + path.length());
@@ -57,7 +58,7 @@ public class Main {
     }
 
 
-    public static boolean DotCheck(char[] ch){
+    public static boolean DotCheck(char[] ch){//check for a dot in a file or folder name
         for(int i = 0 ; i < ch.length ; i++){
             if(ch[i]==46)
                 return true;
