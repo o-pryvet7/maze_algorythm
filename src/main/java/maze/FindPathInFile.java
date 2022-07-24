@@ -65,7 +65,48 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         char[] back_way = new char[min];
         char[] way = new char[back_way.length+1];
         while(wavePoints[ (temp_y*width)+temp_x ].GetValue() != wavePoints[ (start_poz_y*width)+start_poz_x ].GetValue()){
-            if( )
+            if((wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()<min) && //right
+                    (wavePoints[ (temp_y*width)+temp_x+1 ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()+1) &&
+                    (wavePoints[ (temp_y*width)+temp_x+1 ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY())  )
+                min=wavePoints[ (temp_y*width)+temp_x+1 ].GetValue();
+            if((wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()<min) && //down
+                    (wavePoints[ ((temp_y+1)*width)+temp_x ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()) &&
+                    (wavePoints[ ((temp_y+1)*width)+temp_x ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY()+1)  )
+                min=wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue();
+            if((wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()<min) && //left
+                    (wavePoints[ (temp_y*width)+temp_x-1 ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()-1) &&
+                    (wavePoints[ (temp_y*width)+temp_x-1 ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY())  )
+                min=wavePoints[ (temp_y*width)+temp_x-1 ].GetValue();
+            if((wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()<min) && //up
+                    (wavePoints[ ((temp_y-1)*width)+temp_x ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()) &&
+                    (wavePoints[ ((temp_y-1)*width)+temp_x ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY()-1)  )
+                min=wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue();
+
+            if((wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()<min) && //right
+                    (wavePoints[ (temp_y*width)+temp_x+1 ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()+1) &&
+                    (wavePoints[ (temp_y*width)+temp_x+1 ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY())  ){
+
+            }
+
+            if((wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()<min) && //down
+                    (wavePoints[ ((temp_y+1)*width)+temp_x ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()) &&
+                    (wavePoints[ ((temp_y+1)*width)+temp_x ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY()+1)  ){
+
+            }
+
+            if((wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()<min) && //left
+                    (wavePoints[ (temp_y*width)+temp_x-1 ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()-1) &&
+                    (wavePoints[ (temp_y*width)+temp_x-1 ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY())  ) {
+
+            }
+
+
+            if((wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()<min) && //up
+                    (wavePoints[ ((temp_y-1)*width)+temp_x ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()) &&
+                    (wavePoints[ ((temp_y-1)*width)+temp_x ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY()-1)  ) {
+
+            }
+
         }
 
         return way;
