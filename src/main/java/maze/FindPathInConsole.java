@@ -27,44 +27,52 @@ public class FindPathInConsole extends  AbstractFindPathInputReader{
     @Override
     public void FindPath() {
         //do nothing
+
     }
 
     @Override
     public void WavePointsInitial() {
         //do nothing
+
     }
 
     @Override
     public char[] RememberingWay() {
         //do nothing
+
         return new char[0];
     }
 
     @Override
     public void WaveMethod() {
         //do nothing
+
     }
 
     @Override
     public int FindSpecificPoint(int x, int y) {
         //do nothing
+
         return 0;
     }
 
     @Override
     public int TargetPointCheck() {
         //do nothing
+
         return 0;
     }
 
     @Override
     public void SizeAnalysis() {
         //do nothing
+
     }
 
     @Override
     public void TransferMazeCharToInt() {
         //do nothing
+
     }
 
     private void Input() {
