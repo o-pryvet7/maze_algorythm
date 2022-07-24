@@ -58,9 +58,15 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         }
     }
 
-    public ArrayList<Character> RememberingWay(){
-        ArrayList<Character> way = new ArrayList<Character>();
+    public char[] RememberingWay(){
+        //ArrayList<Character> way = new ArrayList<>();
         int targetWayIndex = FindSpecificPoint(target_poz_x,target_poz_y);
+        int min=wavePoints[targetWayIndex].GetValue(), temp_x = wavePoints[targetWayIndex].GetX(), temp_y = wavePoints[targetWayIndex].GetY();
+        char[] back_way = new char[min];
+        char[] way = new char[back_way.length+1];
+        while(wavePoints[ (temp_y*width)+temp_x ].GetValue() != wavePoints[ (start_poz_y*width)+start_poz_x ].GetValue()){
+
+        }
 
         return way;
     }
