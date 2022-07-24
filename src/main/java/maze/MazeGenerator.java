@@ -2,8 +2,6 @@ package maze;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
-import java.util.Scanner;
 
 public class MazeGenerator {
 
@@ -27,23 +25,18 @@ public class MazeGenerator {
             FileWriter fileWriter = new FileWriter("src/main/resources/temp.txt", false);
             for(int i = 0;i < height; i++){
                 for(int k=0;k<width;k++){
-                    temp = 0 + (int)(Math.random()*2);
-                    switch (temp){
-                        case 0:
-                        case 2:
-                            maze[k][i] = '.';
-                            break;
-                        case 1:
-                            maze[k][i] = '#';
-                            break;
+                    temp = (int)(Math.random()*2);
+                    switch (temp) {
+                        case 0, 2 -> maze[k][i] = '.';
+                        case 1 -> maze[k][i] = '#';
                     }
                 }
             }
-            temp = 0 +(int) (Math.random()*width);
-            temp2 = 0 +(int) (Math.random()*height);
+            temp = (int) (Math.random()*width);
+            temp2 = (int) (Math.random()*height);
             maze[temp][temp2] = 'S';
-            temp = 0 +(int) (Math.random()*width);
-            temp2 = 0 +(int) (Math.random()*height);
+            temp = (int) (Math.random()*width);
+            temp2 = (int) (Math.random()*height);
             maze[temp][temp2] = 'X';
             fileWriter.flush();
             fileWriter.close();
