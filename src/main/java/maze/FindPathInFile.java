@@ -4,6 +4,7 @@ package maze;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 //import java.net.MalformedURLException;
 
@@ -15,25 +16,22 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     private boolean foundTarget=false;
 
     //<-Wave method
-    private short prev_mov=-1, prev_prev_mov=-1, current_mov=-1;
+    private int prev_mov=-1, prev_prev_mov=-1, current_mov=-1;
     //private String temp_imp_maze;
     private char[][] _maze;
-    private short[][] _maze_index;// -1-target, 0-free way, 1-a free path that has already been used, 2-start, 3-wall,
+    private int[][] _maze_index;// -1-target, 0-free way, 1-a free path that has already been used, 2-start, 3-wall,
     private int height=0,width=0;
-    private short start_poz_x=0, start_poz_y=0, target_poz_x=0, target_poz_y=0;
-    private short current_x=0, current_y=0;
+    private int start_poz_x=0, start_poz_y=0, target_poz_x=0, target_poz_y=0;
+    private int current_x=0, current_y=0;
 
     public void Run(){
         SizeAnalysis();
-        if(FileEquals("src/main/resources/previous_maze.md" ,GetFileName())){
-            System.out.println("MAZES IS EQUALS");
-        } else System.out.println("MAZES ISN`T EQUALS");
         ReadFile();
         TransferMazeCharToInt();
-        FindPath(FileEquals("src/main/resources/previous_maze.md" ,GetFileName()));
+        FindPath();
     }
 
-    public void FindPath(boolean Equals){
+    public void FindPath(){
         SetCurrentPosition(start_poz_x,start_poz_y);
         WaveMethod();
         //FindPathBody();
@@ -52,11 +50,19 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     wavePoints[ (i*width+k) ].SetX(k);
                     wavePoints[ (i*width+k) ].SetY(i);
                     wavePoints[ (start_poz_y*width+start_poz_x) ].SetValue(1);
+                    System.out.println(" start_poz_y*width+start_poz_x : "+(start_poz_y*width+start_poz_x)+"   start x "+ start_poz_x+"      start y"+ start_poz_y);
                     if(_maze_index[k][i]==3){
                         wavePoints[ (i*width+k) ].SetIsWall(true);
                     }
             }
         }
+    }
+
+    public ArrayList<Character> RememberingWay(){
+        ArrayList<Character> way = new ArrayList<Character>();
+        int targetWayIndex = FindSpecificPoint(target_poz_x,target_poz_y);
+
+        return way;
     }
 
     public void WaveMethodDisplay(){
@@ -86,28 +92,28 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             for(int i = 0; i < wavePoints.length; i++){
                 if(wavePoints[i].GetValue() == Value){
                     if(wavePoints[i].GetX()<width-1){
-                        temp_counter = FindNearPoint(wavePoints[i].GetX()+1, wavePoints[i].GetY());
+                        temp_counter = FindSpecificPoint(wavePoints[i].GetX()+1, wavePoints[i].GetY());
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
                     }
                     if(wavePoints[i].GetX()>0){
-                        temp_counter = FindNearPoint(wavePoints[i].GetX()-1, wavePoints[i].GetY());
+                        temp_counter = FindSpecificPoint(wavePoints[i].GetX()-1, wavePoints[i].GetY());
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
                     }
                     if(wavePoints[i].GetY()<height-1){
-                        temp_counter = FindNearPoint(wavePoints[i].GetX(), wavePoints[i].GetY()+1);
+                        temp_counter = FindSpecificPoint(wavePoints[i].GetX(), wavePoints[i].GetY()+1);
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
                     }
                     if(wavePoints[i].GetY()>0){
-                        temp_counter = FindNearPoint(wavePoints[i].GetX(), wavePoints[i].GetY()-1);
+                        temp_counter = FindSpecificPoint(wavePoints[i].GetX(), wavePoints[i].GetY()-1);
                         if((wavePoints[temp_counter].GetValue() == 0) && (wavePoints[temp_counter].IsEnabled()) && (!wavePoints[temp_counter].GetIsWall()) ){
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
@@ -120,7 +126,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         System.out.println(" --- FINAL --- ");
     }
 
-    public int FindNearPoint(int x, int y){
+    public int FindSpecificPoint(int x, int y){
         for(int i = 0;i<wavePoints.length;i++){
             if(wavePoints[i].GetX()==x && wavePoints[i].GetY()==y)
                 return i;
@@ -147,7 +153,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             catch(InterruptedException ex){
                 Thread.currentThread().interrupt();
             }
-            current_mov = (short)(rand.nextInt(3));
+            current_mov =(rand.nextInt(3));
             System.out.println(" \nCURRENT POS : "+current_x+" X "+current_y);
            // try {
                 //Thread.sleep( 500);
@@ -233,15 +239,21 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     }
 
     public void TransferMazeCharToInt(){
-        short temp=2;
+        int temp=2;
         width-=2;
         System.out.println("Width is : "+ width +", Height is : "+ height);
         for(int i=0;i<height;i++){
             for(int j=0;j<width;j++){
-                if(_maze[j][i]==83)
+                if(_maze[j][i]==83){
                     temp=2;
-                else if(_maze[j][i]==88)
+                    start_poz_x=j;
+                    start_poz_x=i;
+                }
+                else if(_maze[j][i]==88){
                     temp=-1;
+                    target_poz_x=j;
+                    target_poz_y=i;
+                }
                 else if(_maze[j][i]==46)
                     temp=0;
                 else if(_maze[j][i]==35)
@@ -254,36 +266,10 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         }
     }
 
-    private boolean FileEquals(String Writer, String Reader){
-        boolean temp_return = true;
-        try{
-            FileReader fileReader = new FileReader(Reader);
-            FileReader fileWriter = new FileReader(Writer);
-            int chars1 = fileReader.read();
-            int chars2 = fileWriter.read();
-            System.out.println("Start Check File Equals");
-            if(chars1!=-1 && chars2!=-1)
-                while(chars1!=-1 || chars2!=-1){
-                    if(chars1!=chars2){
-                        temp_return = false;
-                    }
-                    chars1 = fileReader.read();
-                    chars2 = fileWriter.read();
-                }
-            fileWriter.close();
-            fileReader.close();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        return temp_return;
-    }
-
     private void ReadFile(){
-        short x=0,y=0;
+        int x=0,y=0;
         try{
             FileReader fileReader = new FileReader(FileName);
-            FileWriter fileWriter_maze = new FileWriter("src/main/resources/previous_maze.md");
             int chars=0;
             System.out.println("Start Read");
             if(chars!=-1){
@@ -295,7 +281,6 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                         Thread.currentThread().interrupt();
                     }
                     chars = fileReader.read();
-                    fileWriter_maze.write((char)chars);
                     if(chars != 13 && chars !=10){
                         //System.out.print((char)chars);
                         _maze[x][y] = (char)chars;
@@ -309,11 +294,11 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                         }
                     }
                     if(_maze[x][y] == 'S'){
-                        start_poz_x= (short) (x-1);
+                        start_poz_x= (int) (x-1);
                         start_poz_y=y;
                     }
                     else if(_maze[x][y] == 'X'){
-                        target_poz_x= (short) (x-1);
+                        target_poz_x= (int) (x-1);
                         target_poz_y=y;
                     }
                     if(chars==13 || chars==10)x--;
@@ -329,7 +314,6 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             }
             else
                 System.out.println("\nERROR");
-            fileWriter_maze.close();
             fileReader.close();
         }
         catch(IOException e){
@@ -363,7 +347,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             e.printStackTrace();
         }
         _maze = new char[width][height];
-        _maze_index = new short[width][height];
+        _maze_index = new int[width][height];
         System.out.println("End Analysis");
 
     }
@@ -374,20 +358,20 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         return FileName;
     }
 
-    public void SetCurrentPosition(short _x, short _y){
+    public void SetCurrentPosition(int _x, int _y){
         current_x=_x;
         current_y=_y;
     }
-    public void SetCurrent_x(short _x){
+    public void SetCurrent_x(int _x){
         current_x=_x;
     }
-    public void SetCurrent_y(short _y){
+    public void SetCurrent_y(int _y){
         current_y=_y;
     }
-    public short GetCurrent_x(){
+    public int GetCurrent_x(){
         return current_x;
     }
-    public short GetCurrent_y(){
+    public int GetCurrent_y(){
         return current_y;
     }
 }
