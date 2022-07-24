@@ -34,6 +34,11 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     public void FindPath(){
         SetCurrentPosition(start_poz_x,start_poz_y);
         WaveMethod();
+        char[] final_way;
+        final_way = RememberingWay();
+        for(int i = 0; i<final_way.length ; i++){
+            System.out.print((char)(final_way[i]) + ",");
+        }
         //FindPathBody();
         //System.out.println("\n\nALL IS DONE\n\n");
     }
@@ -50,7 +55,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     wavePoints[ (i*width+k) ].SetX(k);
                     wavePoints[ (i*width+k) ].SetY(i);
                     wavePoints[ (start_poz_y*width+start_poz_x) ].SetValue(1);
-                    System.out.println(" start_poz_y*width+start_poz_x : "+(start_poz_y*width+start_poz_x)+"   start x "+ start_poz_x+"      start y"+ start_poz_y);
+                    //System.out.println(" start_poz_y*width+start_poz_x : "+(start_poz_y*width+start_poz_x)+"   start x "+ start_poz_x+"      start y"+ start_poz_y);
                     if(_maze_index[k][i]==3){
                         wavePoints[ (i*width+k) ].SetIsWall(true);
                     }
@@ -62,9 +67,8 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         //ArrayList<Character> way = new ArrayList<>();
         int targetWayIndex = FindSpecificPoint(target_poz_x,target_poz_y);
         int min=wavePoints[targetWayIndex].GetValue(), temp_x = wavePoints[targetWayIndex].GetX(), temp_y = wavePoints[targetWayIndex].GetY();
-        char[] back_way = new char[min];
-        char[] way = new char[back_way.length+1];
-        while(wavePoints[ (temp_y*width)+temp_x ].GetValue() != wavePoints[ (start_poz_y*width)+start_poz_x ].GetValue()){
+        char[] way = new char[min+2];
+        do{
             if((wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()<min) && //right
                     (wavePoints[ (temp_y*width)+temp_x+1 ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()+1) &&
                     (wavePoints[ (temp_y*width)+temp_x+1 ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY())  )
@@ -82,32 +86,36 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     (wavePoints[ ((temp_y-1)*width)+temp_x ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY()-1)  )
                 min=wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue();
 
-            if((wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()<min) && //right
+            if((wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x+1 ].GetValue()==min) && //right
                     (wavePoints[ (temp_y*width)+temp_x+1 ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()+1) &&
                     (wavePoints[ (temp_y*width)+temp_x+1 ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY())  ){
-
+                temp_x++;
+                way[min-1] = 'l';
             }
 
-            if((wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()<min) && //down
+            else if((wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y+1)*width)+temp_x ].GetValue()==min) && //down
                     (wavePoints[ ((temp_y+1)*width)+temp_x ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()) &&
                     (wavePoints[ ((temp_y+1)*width)+temp_x ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY()+1)  ){
-
+                temp_y++;
+                way[min-1] = 'u';
             }
 
-            if((wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()<min) && //left
+            else if((wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()>0) && (wavePoints[ (temp_y*width)+temp_x-1 ].GetValue()==min) && //left
                     (wavePoints[ (temp_y*width)+temp_x-1 ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()-1) &&
                     (wavePoints[ (temp_y*width)+temp_x-1 ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY())  ) {
-
+                temp_x--;
+                way[min-1] = 'r';
             }
 
 
-            if((wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()<min) && //up
+            else if((wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()>0) && (wavePoints[ ((temp_y-1)*width)+temp_x ].GetValue()==min) && //up
                     (wavePoints[ ((temp_y-1)*width)+temp_x ].GetX()==wavePoints[ (temp_y*width)+temp_x ].GetX()) &&
                     (wavePoints[ ((temp_y-1)*width)+temp_x ].GetY()==wavePoints[ (temp_y*width)+temp_x ].GetY()-1)  ) {
-
+                temp_y--;
+                way[min-1] = 'd';
             }
 
-        }
+        }while(wavePoints[ (temp_y*width)+temp_x ].GetValue() != wavePoints[ (start_poz_y*width)+start_poz_x ].GetValue());
 
         return way;
     }
@@ -168,7 +176,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     }
                 }
             }
-            WaveMethodDisplay();
+            //WaveMethodDisplay();
         }
         System.out.println(" --- FINAL --- ");
     }
@@ -307,9 +315,9 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     temp=3;
 
                 _maze_index[j][i]=temp;
-                System.out.print(" "+_maze_index[j][i]);
+                //System.out.print(" "+_maze_index[j][i]);
             }
-            System.out.println();
+            //FtargetSystem.out.println();
         }
     }
 
@@ -344,19 +352,12 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                         start_poz_x= (int) (x-1);
                         start_poz_y=y;
                     }
-                    else if(_maze[x][y] == 'X'){
+                    if(_maze[x][y] == 'X'){
                         target_poz_x= (int) (x-1);
                         target_poz_y=y;
                     }
                     if(chars==13 || chars==10)x--;
                     //System.out.print("\nRead is ok, current x is: "+x+", current y is: "+y+",current char symbol is :"+chars+", current chars is :");
-                }
-                System.out.println(" --- ");
-                for (int n = 0; n < height; n++){
-                    for(int m = 0; m < width; m++){
-                        System.out.print(" "+_maze[m][n]);
-                    }
-                    System.out.println("");
                 }
             }
             else
@@ -366,7 +367,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         catch(IOException e){
             e.printStackTrace();
         }
-        System.out.println("\n\nEnd Read\nStart ["+start_poz_x+", "+start_poz_y+"],  target ["+target_poz_x+", "+target_poz_y+"]");
+        System.out.println("\nEnd Read");
 
     }
 
