@@ -197,7 +197,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         return -1;
     }
 
-     public boolean FindPathBody(){
+    public boolean FindPathBody(){
         Random rand = new Random();
         int temp_way[] = new int[4];//index  : 0-right, 1-up, 2-left, 3-down   // value like _maze_index
         System.out.println(" - FINDPATHRECURSION Start - ");
@@ -321,7 +321,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         }
     }
 
-    private void ReadFile(){
+    public void ReadFile(){
         int x=0,y=0;
         try{
             FileReader fileReader = new FileReader(FileName);
@@ -397,7 +397,6 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         _maze = new char[width][height];
         _maze_index = new int[width][height];
         System.out.println("End Analysis");
-
     }
     public void SetFileName(String Name){
         FileName=Name;

@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.5.1.3 - path entry">
+    <list default="true" id="623d9bc2-00cf-45a2-a479-e68ad3ec4fb0" name="Changes" comment="v1.5.2 - file processing completed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInConsole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/AbstractFindPathInputReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/FindPathInFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/FindPathInStdIn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/maze/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/maze/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,15 +45,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/praca/Programing/workTest/maze_algorithm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindowRun.ShowToolbar": "false",
+    "last_opened_file_path": "D:/praca/Programing/workTest/maze_algorithm",
+    "settings.editor.selected.configurable": "preferences.editor"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="maze_algorithm" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="maze.Main" />
@@ -194,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658670229694</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="v1.5.2 - file processing completed">
+      <created>1658672638296</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1658672638296</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -224,6 +236,7 @@
     <MESSAGE value="v1.5.1.1 - path entry" />
     <MESSAGE value="v1.5.1.2 - path entry" />
     <MESSAGE value="v1.5.1.3 - path entry" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.5.1.3 - path entry" />
+    <MESSAGE value="v1.5.2 - file processing completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.5.2 - file processing completed" />
   </component>
 </project>
