@@ -121,12 +121,6 @@ public class FindPathInFile extends AbstractFindPathInputReader {
     }
 
     public void WaveMethodDisplay(){
-        try {
-            Thread.sleep(100);
-        }
-        catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
         for(int i = 0;i < height; i++){
             for(int k = 0;k < width; k++){
                 System.out.print(" "+wavePoints[ (i*width+k) ].GetValue());
@@ -139,16 +133,19 @@ public class FindPathInFile extends AbstractFindPathInputReader {
 
     public void WaveMethod(){
         WavePointsInitial();
+        int temp_mov_counter=0;
         int Value = 0;
         int temp_counter=0;
         int target_index = TargetPointCheck();
         while(wavePoints[target_index].GetValue()==0){
+            temp_mov_counter=0;
             Value++;
             for(int i = 0; i < wavePoints.length; i++){
                 if(wavePoints[i].GetValue() == Value){
                     if(wavePoints[i].GetX()<width-1){
                         temp_counter = FindSpecificPoint(wavePoints[i].GetX()+1, wavePoints[i].GetY());
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                            temp_mov_counter++;
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
@@ -156,6 +153,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     if(wavePoints[i].GetX()>0){
                         temp_counter = FindSpecificPoint(wavePoints[i].GetX()-1, wavePoints[i].GetY());
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                            temp_mov_counter++;
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
@@ -163,6 +161,7 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     if(wavePoints[i].GetY()<height-1){
                         temp_counter = FindSpecificPoint(wavePoints[i].GetX(), wavePoints[i].GetY()+1);
                         if(wavePoints[temp_counter].GetValue() == 0 && wavePoints[temp_counter].IsEnabled() && !wavePoints[temp_counter].GetIsWall() ){
+                            temp_mov_counter++;
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
@@ -170,11 +169,16 @@ public class FindPathInFile extends AbstractFindPathInputReader {
                     if(wavePoints[i].GetY()>0){
                         temp_counter = FindSpecificPoint(wavePoints[i].GetX(), wavePoints[i].GetY()-1);
                         if((wavePoints[temp_counter].GetValue() == 0) && (wavePoints[temp_counter].IsEnabled()) && (!wavePoints[temp_counter].GetIsWall()) ){
+                            temp_mov_counter++;
                             wavePoints[temp_counter].SetValue(Value+1);
                             wavePoints[temp_counter].Disabled();
                         }
                     }
                 }
+            }
+            if( temp_mov_counter==0){
+                System.out.println(" ERROR.  THERE IS NO SUITABLE PATH, OR MEMORY FAILURE ");
+                System.exit(0);
             }
             //WaveMethodDisplay();
         }
@@ -202,19 +206,8 @@ public class FindPathInFile extends AbstractFindPathInputReader {
         int temp_way[] = new int[4];//index  : 0-right, 1-up, 2-left, 3-down   // value like _maze_index
         System.out.println(" - FINDPATHRECURSION Start - ");
         while(_maze_index[current_x][current_y]!=-1){
-            try{
-                Thread.sleep(10);
-            }
-            catch(InterruptedException ex){
-                Thread.currentThread().interrupt();
-            }
             current_mov =(rand.nextInt(3));
             System.out.println(" \nCURRENT POS : "+current_x+" X "+current_y);
-           // try {
-                //Thread.sleep( 500);
-            //} catch (InterruptedException ie) {
-            //    Thread.currentThread().interrupt();
-            //}
             //System.out.println(" - FINDPATHRECURSION GO - ");
             if((current_x<width-1) && (_maze_index[current_x+1][current_y]==BestWay(current_x,current_y)) && (_maze_index[current_x+1][current_y]<3) && ((prev_mov!=2) || (current_mov==0))){
                 temp_way[0] =_maze_index[current_x+1][current_y];
@@ -329,12 +322,6 @@ public class FindPathInFile extends AbstractFindPathInputReader {
             System.out.println("Start Read");
             if(chars!=-1){
                 while(chars != -1){
-                    try {
-                        Thread.sleep(5);
-                    }
-                    catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                    }
                     chars = fileReader.read();
                     if(chars != 13 && chars !=10){
                         //System.out.print((char)chars);
