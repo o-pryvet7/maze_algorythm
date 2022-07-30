@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"maze","l":"FindPathInConsole"},{"p":"maze","l":"FindPathInFile"},{"p":"maze","l":"Main"},{"p":"maze","l":"MazeGenerator"},{"p":"maze","l":"WavePoint"}];updateSearchResults();

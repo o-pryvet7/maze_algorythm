@@ -4,47 +4,37 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class FindPathInConsole extends  AbstractFindPathInputReader{
+/**
+ * @author o_pryvet7
+ * <p>Reading and solving a maze that the user can enter manually through the console</p>
+ */
+public class FindPathInConsole {
 
-    public void Run(){//...yes
+    /**
+     * character-by-character writing of the maze to a file and further transfer of this file for processing
+     * @see FindPathInFile
+     * @see FindPathInFile#Run()
+     */
+    public void Run() {
         FindPathInFile findPathInFile = new FindPathInFile();
-        findPathInFile.SetFileName( Input());
+        findPathInFile.SetFileName(Input());
         findPathInFile.Run();
     }
 
-    @Override
-    public void FindPath() {/*do nothing*/}
-    @Override
-    public void WavePointsInitial() {/*do nothing*/}
-    @Override
-    public char[] RememberingWay() {/*do nothing*/return new char[0];}
-    @Override
-    public void WaveMethod() {/*do nothing*/}
-    @Override
-    public int FindSpecificPoint(int x, int y) {/*do nothing*/return 0;}
-    @Override
-    public int TargetPointCheck() {/*do nothing*/return 0;}
-    @Override
-    public void SizeAnalysis() {/*do nothing*/}
-    @Override
-    public void TransferMazeCharToInt() {/*do nothing*/}
-    private String Input() {//data input
+    private String Input() {
         try {
             FileWriter fileWriter = new FileWriter("src/main/resources/temp.txt", false);
             Scanner scanner = new Scanner(System.in);
             String _line = scanner.nextLine();
-            while (_line != "ITSALL"  &&  (_line.charAt(1)=='.' || _line.charAt(1)=='#' || _line.charAt(1)=='S' || _line.charAt(1)=='X')) {
+            while (_line != "ITSALL" && (_line.charAt(1) == '.' || _line.charAt(1) == '#' || _line.charAt(1) == 'S' || _line.charAt(1) == 'X')) {
                 fileWriter.write(_line);
-                //System.out.println(" - "+_line);
                 _line = scanner.nextLine();//A rather bad method is used here, because I could not find a normal way to write by character
                 fileWriter.write('\n');
-                //fileWriter.write((char)13);
             }
             System.out.println("Thanks");
             fileWriter.flush();
             fileWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         return ("src/main/resources/temp.txt");
